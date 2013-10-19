@@ -1,3 +1,12 @@
+[user]
+  name = Marshall
+  email = mmoutenot@gmail.com
+  name = mmoutenot
+
+[github]
+  user = mmoutenot
+  token = 7633d6594f85962dd0eb79943aeb54f6
+
 [alias]
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
@@ -23,6 +32,7 @@
 	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
 	# Interactive rebase with the given number of latest commits
 	reb = "!r() { git rebase -i HEAD~$1; }; r"
+
 
 [apply]
 	# Detect whitespace errors when applying a patch
@@ -59,6 +69,14 @@
 [merge]
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
+  tool = vimdiff
+[diff]
+  tool = vimdiff
+
+
+[branch]
+  autosetupmerge = true
+  autosetuprebase = always
 
 # URL shorthands
 [url "git@github.com:"]
@@ -75,4 +93,5 @@
 	insteadOf = "gist:"
 
 [push]
-	default = matching
+  default = current
+
