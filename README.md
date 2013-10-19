@@ -1,4 +1,4 @@
-# Mathias’s dotfiles
+# Marshall’s dotfiles
 
 ## Installation
 
@@ -20,14 +20,6 @@ Alternatively, to update while avoiding the confirmation prompt:
 
 ```bash
 set -- -f; source bootstrap.sh
-```
-
-### Git-free install
-
-To install these dotfiles without Git:
-
-```bash
-cd; curl -#L https://github.com/mathiasbynens/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,bootstrap.sh,LICENSE-MIT.txt}
 ```
 
 To update later on, just run that command again.
