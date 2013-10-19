@@ -37,6 +37,9 @@ brew install lua52
 brew install ghc
 brew install haskell-platform
 
+# Ridiculous Fish Shell
+brew install fish
+
 # Install native apps
 brew tap phinze/homebrew-cask
 brew install brew-cask
