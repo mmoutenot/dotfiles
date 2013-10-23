@@ -14,8 +14,10 @@ function doIt() {
   git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
   vim -E -c BundleInstall -c q
 
-  # install oh-my-zsh
+  # install oh-my-fish
   curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.sh | sh
+  grep -q '^/usr/local/bin/fish$' /etc/shells; or echo '/usr/local/bin/fish' | sudo tee -a /etc/shells
+  chsh -s /usr/local/bin/fish
 }
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
   doIt
