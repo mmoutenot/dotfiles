@@ -5,7 +5,7 @@
 
 [github]
   user = mmoutenot
-  token = 7633d6594f85962dd0eb79943aeb54f6
+  token = [token]
 
 [alias]
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
