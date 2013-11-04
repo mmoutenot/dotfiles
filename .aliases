@@ -123,7 +123,3 @@ alias grunt="grunt --stack"
 # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
-# Crashlytics Specific
-alias dadsprod "ssh dads1001.crash.io -t \"sudo su deploy; and cd /srv/dads/current; sh -i\""
-alias pservprod "ssh project-service1001.crash.io -t \"sudo su deploy; and cd /srv/project_service/current; sh -i\""
-
