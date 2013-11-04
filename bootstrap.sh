@@ -4,11 +4,11 @@ git pull origin master
 function doIt() {
   rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
     --exclude "README.md" --exclude "LICENSE-MIT.txt" -av --no-perms . ~
-  source ~/.bash_profile
+  . ~/.config/fish/config.fish
+
+  git config --global core.excludesfile ~/.gitignore_global
 
   sh .brew
-
-  sh .osx
 
   # install bundle and vim bundles
   git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle

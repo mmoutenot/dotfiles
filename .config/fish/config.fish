@@ -14,6 +14,9 @@ set fish_custom $HOME/dotfiles/oh-my-fish
 # Load oh-my-fish cofiguration.
 . $fish_path/oh-my-fish.fish
 
+# Load external files
+. ~/.aliases
+
 set PATH ~/.cabal/bin /usr/local/bin /usr/local/share /usr/local/share/npm/bin $PATH
 set PYTHONPATH /usr/local/lib/python2.7/site-packages $PYTHONPATH
 
