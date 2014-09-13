@@ -6,94 +6,94 @@
 " " Catered to the needs and woes of a Tufts University student
 " " Contact Marshall @ mmoutenot@gmail.com with questions or comments.
 "
+let mapleader = ","
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-let mapleader = ","
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-" My Bundles here:
+" My Plugins here:
 
 " Allows you to use <tab> for all insert completion needs
-Bundle 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 
 " Comment plugin - gcc toggles comment of current line
-Bundle 'tomtom/tcomment_vim'
+Plugin 'tomtom/tcomment_vim'
 
 " adds cool git stuff from within vim
-Bundle 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
 
 " cs"' changes surrounding " to '
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 
 " Rails integration
-Bundle 'tpope/vim-rails'
+Plugin 'tpope/vim-haml'
 
 " quick file switcher
-Bundle 'wincent/Command-T'
-
-Bundle 'vim-scripts/right_align'
+Plugin 'wincent/Command-T'
+set wildignore+=node_modules/**
+set wildignore+=bower_components/**
 
 " Snipmate and dependencies
 " Allows you to complete code snipits like 'for loops'!
-" Bundle "MarcWeber/vim-addon-mw-utils"
-" Bundle "tomtom/tlib_vim"
-" Bundle "honza/snipmate-snippets"
-" Bundle 'garbas/vim-snipmate'
+" Plugin "MarcWeber/vim-addon-mw-utils"
+" Plugin "tomtom/tlib_vim"
+" Plugin "honza/snipmate-snippets"
+" Plugin 'garbas/vim-snipmate'
 
 " Aligns on any character with ':Align ='
-Bundle 'vim-scripts/Align'
+Plugin 'vim-scripts/Align'
 
 " Run ack from within vim!
-Bundle 'rking/ag.vim'
-noremap <Leader>a :Ag <cword><cr>
+Plugin 'rking/ag.vim'
 
+" fantastic file browser, open a directory with vim
 " 1. Open NERDtree
 " 2. Point to a directory
 " 3. Press `ms`
 " 4. Enter search term (e.g. `control\ panel -i`)
 " 5. Profit!
-" Bundle 'vim-scripts/nerdtree-ack'
+Plugin 'scrooloose/nerdtree'
+Plugin 'vim-scripts/nerdtree-ack'
+
+" TESTING
+Plugin 'tpope/vim-dispatch'
 
 " BEAUTIFUL COLORZ
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'Lokaltog/vim-distinguished'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-distinguished'
 
 " BEAUTIFUL POWERLINE
-Bundle 'Lokaltog/vim-powerline'
+" Plugin 'Lokaltog/vim-powerline'
 
 " Git gutter shows diffs on the left num bar!
-Bundle 'airblade/vim-gitgutter'
+Plugin 'airblade/vim-gitgutter'
 
 " Coffeescript support
-Bundle 'kchmck/vim-coffee-script'
+Plugin 'kchmck/vim-coffee-script'
 
-" Markdown support
-Bundle 'tpope/vim-markdown'
+" Jade support
+Plugin 'digitaltoad/vim-jade'
+Plugin 'wavded/vim-stylus'
 
 " syntax checking
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 
-" fantastic file browser, open a directory with vim
-Bundle 'scrooloose/nerdtree'
-" autocmd vimenter * NERDTree
+call vundle#end()
+filetype plugin indent on
+
+noremap <Leader>a :Ag <cword><cr>
+autocmd FileType coffee let b:dispatch = 'mocha --compilers coffee:coffee-script/register %'
 noremap <Leader>n :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
-" undo tree visualization
-Bundle 'sjl/gundo.vim'
-noremap <Leader>u :GundoToggle<CR>
-
-" VimPad
-Bundle 'fmoralesc/vim-pad'
-let g:pad_dir=$HOME.'/notes/'
-noremap <F6> <Plug>PadSearchPads
+" hamlc
+au BufRead,BufNewFile *.hamlc set ft=haml
 
 "{{{Auto Commands
 
@@ -147,10 +147,7 @@ set cmdheight=2
 " endif
 
 " Syntax Higlighting
-filetype off
-filetype plugin on
-filetype indent on
-
+filetype plugin indent on
 
 " read a file when it is changed from the outside
 set autoread
@@ -542,4 +539,5 @@ noremap <D-S-L> <C-w>l
 set ruler
 set number
 set mouse=a
+filetype on
 
