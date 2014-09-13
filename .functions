@@ -1,6 +1,0 @@
-# List after all cds
-function cd
-  builtin cd $argv; and ls
-end
-
-

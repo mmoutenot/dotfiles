@@ -32,10 +32,10 @@ brew install ack
 brew install git
 brew install imagemagick
 brew install lynx
+brew install mysql
 brew install node
 brew install rename
 brew install tree
-brew install mysql
 
 # Ridiculous Fish Shell
 brew install fish
@@ -47,32 +47,33 @@ function installcask() {
 	brew cask install "${@}" 2> /dev/null
 }
 
+installcask alfred
 installcask charles
 installcask cyberduck
 installcask dash
-installcask gitx-l
-
 installcask dropbox
+installcask gitx-l
 installcask google-chrome
 installcask google-chrome-canary
 installcask imagealpha
 installcask imageoptim
 installcask iterm2
-installcask the-unarchiver
-installcask transmission
-installcask ukelele
-installcask virtualbox
-installcask vlc
+installcask jumpcut
+installcask mailbox
+installcask nvalt
+installcask onepassword
+installcask rdio
+installcask seil
 installcask sketch
 installcask sketch-toolbox
 installcask steam
-installcask vagrant
 installcask sublime-text
-installcask seil
-installcask rdio
-intsallcask jumpcut
-installcask mailbox
-installcask nvalt
+installcask the-unarchiver
+installcask transmission
+installcask ukelele
+installcask vagrant
+installcask virtualbox
+installcask vlc
 
 # Remove outdated versions from the cellar
 brew cleanup
