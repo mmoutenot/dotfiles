@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+if hash brew 2>/dev/null; then
+  echo "installing brew"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 
 # Make sure we’re using the latest Homebrew
 brew update
@@ -31,22 +35,22 @@ brew install lynx
 brew install node
 brew install rename
 brew install tree
-
-brew tap homebrew/versions
-brew install lua52
-brew install ghc
-brew install haskell-platform
+brew install mysql
 
 # Ridiculous Fish Shell
 brew install fish
 
 # Install native apps
-brew tap phinze/homebrew-cask
-brew install brew-cask
+brew install caskroom/cask/brew-cask
 
 function installcask() {
 	brew cask install "${@}" 2> /dev/null
 }
+
+installcask charles
+installcask cyberduck
+installcask dash
+installcask gitx-l
 
 installcask dropbox
 installcask google-chrome
@@ -59,6 +63,16 @@ installcask transmission
 installcask ukelele
 installcask virtualbox
 installcask vlc
+installcask sketch
+installcask sketch-toolbox
+installcask steam
+installcask vagrant
+installcask sublime-text
+installcask seil
+installcask rdio
+intsallcask jumpcut
+installcask mailbox
+installcask nvalt
 
 # Remove outdated versions from the cellar
 brew cleanup
