@@ -11,8 +11,8 @@ function doIt() {
   sh .brew
 
   # install bundle and vim bundles
-  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-  vim -E -c BundleInstall -c q
+  git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  vim -E -c PluginInstall -c q
 
   # install oh-my-fish
   curl -L https://github.com/bpinto/oh-my-fish/raw/master/tools/install.fish | fish

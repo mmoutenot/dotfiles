@@ -35,7 +35,10 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-haml'
 
 " quick file switcher
-Plugin 'wincent/Command-T'
+Plugin 'kien/ctrlp.vim'
+let g:ctrlp_map = '<leader>t'
+let g:ctrlp_working_path_mode = 'a'
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 set wildignore+=node_modules/**
 set wildignore+=bower_components/**
 
@@ -67,9 +70,7 @@ Plugin 'tpope/vim-dispatch'
 " BEAUTIFUL COLORZ
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-distinguished'
-
-" BEAUTIFUL POWERLINE
-" Plugin 'Lokaltog/vim-powerline'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 " Git gutter shows diffs on the left num bar!
 Plugin 'airblade/vim-gitgutter'
@@ -227,7 +228,7 @@ set shell=/bin/bash
 set guioptions-=T
 
 set background=dark
-colorscheme distinguished
+colorscheme grb256
 set encoding=utf8
 
 try

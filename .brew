@@ -32,9 +32,13 @@ brew install ack
 brew install git
 brew install imagemagick
 brew install lynx
+brew install macvim
 brew install mysql
 brew install node
+brew install rbenv --HEAD
+brew install ruby-build
 brew install rename
+brew install the_silver_searcher
 brew install tree
 
 # Ridiculous Fish Shell
@@ -66,6 +70,7 @@ installcask rdio
 installcask seil
 installcask sketch
 installcask sketch-toolbox
+installcask slack
 installcask steam
 installcask sublime-text
 installcask the-unarchiver
