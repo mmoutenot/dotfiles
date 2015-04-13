@@ -19,6 +19,10 @@ Plugin 'gmarik/vundle'
 
 " My Plugins here:
 
+" Semantic highlighting
+Plugin 'jaxbot/semantic-highlight.vim'
+let s:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#f0f4c3', '#ffb74d' ]
+
 " Allows you to use <tab> for all insert completion needs
 Plugin 'ervandew/supertab'
 
@@ -41,6 +45,7 @@ let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 set wildignore+=node_modules/**
 set wildignore+=bower_components/**
+nnoremap <silent> <leader>T :ClearCtrlPCache<cr>\|:CtrlP<cr>
 
 " Snipmate and dependencies
 " Allows you to complete code snipits like 'for loops'!
@@ -54,6 +59,7 @@ Plugin 'vim-scripts/Align'
 
 " Run ack from within vim!
 Plugin 'rking/ag.vim'
+Plugin 'karlbright/qfdo.vim'
 
 " fantastic file browser, open a directory with vim
 " 1. Open NERDtree
@@ -71,6 +77,7 @@ Plugin 'tpope/vim-dispatch'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/vim-distinguished'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+set laststatus=2
 
 " Git gutter shows diffs on the left num bar!
 Plugin 'airblade/vim-gitgutter'
@@ -90,7 +97,8 @@ filetype plugin indent on
 
 noremap <Leader>a :Ag <cword><cr>
 autocmd FileType coffee let b:dispatch = 'mocha --compilers coffee:coffee-script/register %'
-noremap <Leader>n :NERDTreeToggle<CR>
+
+noremap <tab> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
 " hamlc
