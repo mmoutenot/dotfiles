@@ -9,9 +9,14 @@ alias d="cd ~/Dropbox"
 alias dl="cd ~/Downloads"
 alias dt="cd ~/Desktop"
 alias w="cd ~/workspace"
-alias g="git"
 alias h="history"
 alias j="jobs"
+
+alias git="hub"
+alias g="git"
+alias gs="g status"
+
+alias tmux="env TERM=screen-256color-bce tmux"
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1 # GNU `ls`
@@ -90,10 +95,6 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true; kil
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
 
-# Merge PDF files
-# Usage: `mergepdf -o output.pdf input{1,2,3}.pdf`
-alias mergepdf='/System/Library/Automator/Combine\ PDF\ Pages.action/Contents/Resources/join.py'
-
 # Disable Spotlight
 alias spotoff="sudo mdutil -a -i off"
 # Enable Spotlight
@@ -122,4 +123,3 @@ alias grunt="grunt --stack"
 # Kill all the tabs in Chrome to free up memory
 # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
 alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-

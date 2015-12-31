@@ -15,10 +15,6 @@ set -x PATH /usr/local/bin:/usr/local/sbin:$PATH
 set -x PATH /lib/python2.7/site-packages:$PATH
 set -x PYTHONPATH /lib/python2.7/site-packages
 
-set PATH $HOME/.rbenv/bin $PATH
-set PATH $HOME/.rbenv/shims $PATH
-rbenv rehash >/dev/null ^&1
-
 # Load oh-my-fish cofiguration.
 . $fish_path/oh-my-fish.fish
 eval (python -m virtualfish)

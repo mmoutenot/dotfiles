@@ -13,6 +13,8 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'jceb/vim-orgmode'
+
 " let Vundle manage Vundle
 " required!
 Plugin 'gmarik/vundle'
@@ -45,7 +47,7 @@ let g:ctrlp_working_path_mode = 'a'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 set wildignore+=node_modules/**
 set wildignore+=bower_components/**
-nnoremap <silent> <leader>T :ClearCtrlPCache<cr>\|:CtrlP<cr>
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 " Snipmate and dependencies
 " Allows you to complete code snipits like 'for loops'!
@@ -91,6 +93,15 @@ Plugin 'wavded/vim-stylus'
 
 " syntax checking
 Plugin 'scrooloose/syntastic'
+let g:syntastic_javascript_checkers = ['eslint']
+
+Plugin 'othree/yajs.vim'
+Plugin 'mxw/vim-jsx'
+Plugin 'gavocanov/vim-js-indent'
+let g:jsx_ext_required = 0
+
+Plugin 'Townk/vim-autoclose'
+Plugin 'vim-scripts/closetag.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -218,7 +229,7 @@ syntax enable "Enable syntax hl
 
 " Set font according to system
 " if you're using a mac
-set gfn=Menlo:h12
+set gfn="Fira Code":h12
 set shell=/bin/bash
 
 " if you're using windows
