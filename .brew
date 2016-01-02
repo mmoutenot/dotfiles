@@ -40,6 +40,7 @@ brew install ruby-build
 brew install rename
 brew install the_silver_searcher
 brew install tree
+brew install vim
 
 # Ridiculous Fish Shell
 brew install fish
@@ -85,6 +86,7 @@ installcask ukelele
 installcask vagrant
 installcask virtualbox
 installcask vlc
+installcask hub
 
 # Remove outdated versions from the cellar
 brew cleanup

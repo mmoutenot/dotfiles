@@ -1,1 +1,15 @@
+package brew
+package copy
+package gi
+package hub
+package keychain
+package osx
+package pbcopy
+package ssh-term-helper
+package tiny
+package vundle
+theme bobthefish
+theme clearance
+theme dangerous
 theme default
+theme gnuykeaj
