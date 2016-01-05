@@ -87,6 +87,7 @@ installcask vagrant
 installcask virtualbox
 installcask vlc
 installcask hub
+installcask dockertoolbox
 
 # Remove outdated versions from the cellar
 brew cleanup
