@@ -41,6 +41,9 @@ brew install rename
 brew install the_silver_searcher
 brew install tree
 brew install vim
+brew install cmake
+brew install hub
+brew install keychain
 
 # Ridiculous Fish Shell
 brew install fish
@@ -88,6 +91,7 @@ installcask virtualbox
 installcask vlc
 installcask hub
 installcask dockertoolbox
+installcask amethyst
 
 # Remove outdated versions from the cellar
 brew cleanup
