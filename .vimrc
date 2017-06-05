@@ -1,348 +1,191 @@
-" VIMRC (pieces picked from multiple sources, primarily
-" "   http://www.vim.org/scripts/script.php?script_id=760
-" "   http://amix.dk/vim/vimrc.html
-" "   http://stackoverflow.com/questions/164847/what-is-in-your-vimrc
-"
-" " Catered to the needs and woes of a Tufts University student
-" " Contact Marshall @ mmoutenot@gmail.com with questions or comments.
-"
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+" Autoreload vimrc
+autocmd! bufwritepost .vimrc source %
+autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+set shell=bash
+
 let mapleader = ","
-set nocompatible
-filetype off
+noremap ; :
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle
-" required!
-Plugin 'gmarik/vundle'
+" NEW ONES
+Plug 'airblade/vim-gitgutter'
 
-" My Plugins here:
-
-" Semantic highlighting
-Plugin 'jaxbot/semantic-highlight.vim'
-let s:semanticGUIColors = [ '#72d572', '#c5e1a5', '#e6ee9c', '#fff59d', '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5', '#ffa726', '#ff8a65', '#f9bdbb', '#f9bdbb', '#f8bbd0', '#e1bee7', '#d1c4e9', '#ffe0b2', '#c5cae9', '#d0d9ff', '#b3e5fc', '#b2ebf2', '#b2dfdb', '#a3e9a4', '#dcedc8' , '#f0f4c3', '#ffb74d' ]
-:nnoremap <Leader>s :SemanticHighlightToggle<cr>
-
-" Allows you to use <tab> for all insert completion needs
-Plugin 'ervandew/supertab'
-
-" Completion as typing
-Plugin 'Valloric/YouCompleteMe'
-
-" Comment plugin - gcc toggles comment of current line
-Plugin 'tomtom/tcomment_vim'
-
-" cs"' changes surrounding " to '
-Plugin 'tpope/vim-surround'
-
-" quick file switcher
-Plugin 'kien/ctrlp.vim'
-let g:ctrlp_map = '<leader>t'
-let g:ctrlp_working_path_mode = 'a'
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-set wildignore+=node_modules/**
-set wildignore+=bower_components/**
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-
-" Aligns on any character with ':Align ='
-Plugin 'vim-scripts/Align'
-
-" Run ack from within vim!
-Plugin 'rking/ag.vim'
-
-" fantastic file browser, open a directory with vim
-" 1. Open NERDtree
-" 2. Point to a directory
-" 3. Press `ms`
-" 4. Enter search term (e.g. `control\ panel -i`)
-" 5. Profit!
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-scripts/nerdtree-ack'
-
-" BEAUTIFUL COLORZ
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-set laststatus=2
-
-" Git gutter shows diffs on the left num bar!
-Plugin 'airblade/vim-gitgutter'
-
-" Coffeescript support
-Plugin 'kchmck/vim-coffee-script'
-
-" Jade support
-Plugin 'digitaltoad/vim-jade'
-Plugin 'wavded/vim-stylus'
-
-" syntax checking
-Plugin 'scrooloose/syntastic'
-let g:syntastic_javascript_checkers = ['eslint']
-
-Plugin 'othree/yajs.vim'
-Plugin 'mxw/vim-jsx'
-Plugin 'gavocanov/vim-js-indent'
+" Plug 'flowtype/vim-flow'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
-Plugin 'goatslacker/mango.vim'
+Plug 'matze/vim-move'
+
+Plug 'zhaocai/GoldenView.Vim'
+let g:goldenview__enable_default_mapping = 0
+nmap <silent><C-S> <Plug>GoldenViewSplit
+nmap <silent><C-M> <Plug>GoldenViewSwitchMain
+
+""""""""""""""""""""""""""""""
+
+Plug 'ervandew/supertab'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
+let NERDTreeIgnore = ['\.pyc$']
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'benekastah/neomake'
+let g:neomake_python_python_exe = 'python3'
+let g:neomake_javascript_eslint_custom_maker = {
+  \ 'exe': 'eslint',
+  \ 'args': ['--fix', '-f', 'compact'],
+  \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+  \ '%W%f: line %l\, col %c\, Warning - %m'
+  \ }
+let g:neomake_open_list = 2
+let g:neomake_javascript_enabled_makers = ['eslint_custom']
+let g:javascript_plugin_flow = 1
+
+Plug 'mbbill/undotree'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'morhetz/gruvbox'
+Plug 'ap/vim-css-color'
+Plug 'tpope/vim-commentary'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+
+Plug 'wavded/vim-stylus'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'kassio/neoterm'
+Plug 'severin-lemaignan/vim-minimap'
+
+Plug 'vim-scripts/Align'
+
+" Add plugins to &runtimepath
+call plug#end()
+
+let g:deoplete#enable_at_startup = 1
+if !exists('g:deoplete#omni#input_patterns')
+  let g:deoplete#omni#input_patterns = {}
+endif
+" deoplete tab-complete
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" tern
+autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
+" tern
+if exists('g:plugs["tern_for_vim"]')
+  let g:tern_show_argument_hints = 'on_hold'
+  let g:tern_show_signature_in_pum = 1
+  autocmd FileType javascript setlocal omnifunc=tern#Complete
+endif
+set completeopt+=noinsert,noselect
+set completeopt-=preview
+
+hi Pmenu    gui=NONE    guifg=#c5c8c6 guibg=#373b41
+hi PmenuSel gui=reverse guifg=#c5c8c6 guibg=#373b41
+
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#auto_completion_start_length = 1
+set omnifunc=jedi#completions
+let g:jedi#auto_initialization = 1
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#popup_select_first = 0
+let g:jedi#completions_enabled = 0
+let g:jedi#force_py_version = 3
+let g:jedi#smart_auto_mappings = 0
+let g:jedi#show_call_signatures = 0
+let g:jedi#max_doc_height = 100
+
+colorscheme gruvbox
 set background=dark
-syntax on
-color mango
 
-call vundle#end()
-filetype plugin indent on
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 
-noremap <Leader>a :Ag <cword><cr>
-autocmd FileType coffee let b:dispatch = 'mocha --compilers coffee:coffee-script/register %'
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 noremap <tab> :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
 
-"{{{Auto Commands
+" Run neomake on every save
+autocmd BufWritePost * call neomake#Make(1, [], function('s:Neomake_callback'))
 
-" Automatically cd into the directory that the file is in
-" set autochdir
+" Callback for reloading file in buffer when eslint has finished and maybe has
+" autofixed some stuff
+function! s:Neomake_callback(options)
+  if (a:options.status == 0)
+    edit
+  endif
+endfunction
 
-" Remove any trailing whitespace that is in the file
-autocmd BufRead,BufWrite * if ! &bin | silent! %s/\s\+$//ge | endif
+let g:neoterm_size = 10
+nnoremap <silent> ,o :call neoterm#test#run('current')<cr>
 
-" Restore cursor position to where it was before
-augroup JumpCursorOnEdit
-  au!
-  autocmd BufReadPost *
-        \ if expand("<afile>:p:h") !=? $TEMP |
-        \   if line("'\"") > 1 && line("'\"") <= line("$") |
-        \     let JumpCursorOnEdit_foo = line("'\"") |
-        \     let b:doopenfold = 1 |
-        \     if (foldlevel(JumpCursorOnEdit_foo) > foldlevel(JumpCursorOnEdit_foo - 1)) |
-        \        let JumpCursorOnEdit_foo = JumpCursorOnEdit_foo - 1 |
-        \        let b:doopenfold = 2 |
-        \     endif |
-        \     exe JumpCursorOnEdit_foo |
-        \   endif |
-        \ endif
-  " Need to postpone using "zv" until after reading the modelines.
-  autocmd BufWinEnter *
-        \ if exists("b:doopenfold") |
-        \   exe "normal zv" |
-        \   if(b:doopenfold > 1) |
-        \       exe  "+".1 |
-        \   endif |
-        \   unlet b:doopenfold |
-        \ endif
-augroup END
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=251
+  highlight fzf2 ctermfg=23 ctermbg=251
+  highlight fzf3 ctermfg=237 ctermbg=251
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
 
-"}}}
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+nmap <leader>t :FZF<enter>
 
-"{{{Misc Settings
-
-" This shows what you are typing as a command at the bottom of the page
-set showcmd
-set cmdheight=2
-
-set wrap
-set textwidth=120
-let g:RightAlign_RightBorder=120
-if exists('+colorcolumn')
-  set colorcolumn=120
-else
-  au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>120v.\+', -1)
-endif
-
-" Syntax Higlighting
 filetype plugin indent on
 
-" read a file when it is changed from the outside
-set autoread
-
-" Use grep
-set grepprg=grep\ -nH\ $*
-
-" Make the omnicomplete text readable
-highlight PmenuSel ctermfg=black
-
-" Highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
-" The following alternative may be less obtrusive.
-highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
-" Try the following if your GUI uses a dark background.
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-" Show trailing whitespace and spaces before a tab:
-match ExtraWhitespace /\s\+$\| \+\ze\t/
-
-" Change tab to a space character
 set expandtab
 set smarttab
 set shiftwidth=2
 set softtabstop=2
 set tabstop=2
+autocmd FileType python setlocal shiftwidth=2
 
-" Spell checking (default=false)
-if version >= 700
-  set spl=en spell
-  set nospell
-endif
-
-set backspace=2
-set autoindent
-
-" Case handling
 set ignorecase
 set smartcase
 
-" Incremental search
-set incsearch
-set hlsearch
-set nolazyredraw
+set backupdir=~/.bak
+set directory=~/.tmp
 
-" For linux clipboard register
-let g:clipbrdDefaultReg = '+'
+set undofile
+set undodir=~/.tmp/undodir
+set undolevels=1000
+set undoreload=10000
+set hidden
+set textwidth=0
+set wrapmargin=0
 
-" Second paren
-highlight MatchParen ctermbg=4
-"}}}
+" " Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
 
+function! ClipboardYank()
+  call system('pbcopy', @@)
+endfunction
+function! ClipboardPaste()
+  let @@ = system('pbpaste')
+endfunction
 
-"{{{Look and Feel and sound
-syntax enable "Enable syntax hl
-
-" Set font according to system
-" if you're using a mac
-set gfn="Fira Mono for Powerline":h12
-set shell=/bin/bash
-
-" if you're using windows
-"set gfn=Bitstream\ Vera\ Sans\ Mono:h10
-
-" if you're using linux
-"  set gfn=Monospace\ 10
-"  set shell=/bin/bash
-
-" hides the bullsheet
-set guioptions-=T
-
-set background=dark
-set encoding=utf8
-
-try
-  lang en_US
-catch
-endtry
-
-set ffs=unix,dos,mac "Default file types
-
-"Status line gnarliness - I use powerline now
-" set laststatus=2
-" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c
-" function! CurDir()
-"   let curdir = substitute(getcwd(), '/Users/amir/', "~/", "g")
-"   return curdir
-" endfunction
-" function! HasPaste()
-"   if &paste
-"     return 'PASTE MODE  '
-"   else
-"     return ''
-"   endif
-" endfunction
-
-" No sound on errors
-set noerrorbells
-set novisualbell
-set tm=500
-
-set backupdir=~/.tmp
-set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
-
-" }}}
-
-"{{{Functions
-
-"{{{ Open URL in Browser
+noremap <Leader>[ :set nopaste<cr>
+noremap <Leader>] :set paste<cr>
+noremap <Leader>vi :tabe ~/.vimrc<CR>
+noremap <Leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <Leader>s :g//#<Left><Left>
 
 function! Browser()
   let line = getline (".")
   let line = matchstr (line,"http[^  ]*")
   exec "!chrome ".line
 endfunction
-
-"}}}
-
-"{{{ Todo List Mode
-
-function! TodoListMode()
-  e ~/.todo.otl
-  Calendar
-  wincmd l
-  set foldlevel=1
-  tabnew ~/.notes.txt
-  tabfirst
-  "or 'norm! zMzr'
-endfunction
-
-"}}}
-
-"{{{ Persistant Undo
-"if windows
-"set undodir=C:\Windows\Temp
-"otherwise
-set undofile                " Save undo's after file closes
-set undodir='~/.tmp/undodir'
-set undolevels=1000         " How many undos
-set undoreload=10000        " number of lines to save for undo
-set hidden
-"}}}
-
-"}}}
-
-"{{{ Mappings
-
-vmap <C-x> :!pbcopy<CR>
-vmap <C-c> :w !pbcopy<CR><CR>
-
-" Other remaps
-"
-" split navigation
-noremap <C-j> <C-W>j
-noremap <C-k> <C-W>k
-noremap <C-h> <C-W>h
-noremap <C-l> <C-W>l
-
-noremap <Leader>[ :set nopaste<cr>
-noremap <Leader>] :set paste<cr>
-noremap <Leader>vi :tabe ~/.vimrc<CR>
-noremap <Leader>r :%s/\<<C-r><C-w>\>//g<Left><Left>
-
-" Edit another file in the same directory as the current file
-" uses expression to extract path from current file's path
-noremap <Leader>e :e <C-R>=expand("%:p:h") . '/'<CR>
-noremap <Leader>v :vnew
-" noremap <Leader>t :tabe <C-R><CR>
-" Emacs-like beginning and end of line.
-imap <c-e> <c-o>$
-imap <c-a> <c-o>^
-"
-" Open Url with the browser ',w'
 map <Leader>w :call Browser ()<CR>
-
-" Trigger the above todo mode
-noremap <silent> <Leader>todo :execute TodoListMode()<CR>
-
-" Folds html tags
-nnoremap <leader>ft Vatzf
-
-" Centers the next result on the page
-map N Nzz
-map n nzz
-
-" Move up and down easier
-" let g:C_Ctrl_j = 'off'
-" nmap <C-J> <C-d>
-" nmap <C-K> <C-u>
-
-" Swap ; and : (one less keypress)
-nnoremap ; :
-nnoremap : ;
 
 function! DelEmptyLineAbove()
   if line(".") == 1
@@ -385,7 +228,6 @@ function! AddEmptyLineBelow()
   call append(line("."), "")
 endfunction
 
-" Arrow key remapping: Up/Dn = move line up/dn; Left/Right = indent/unindent
 function! SetArrowKeysAsTextShifters()
   " normal mode
   nmap <silent> <Left> <<
@@ -431,22 +273,55 @@ endfunction
 
 call SetArrowKeysAsTextShifters()
 
-" resize current buffer by +/- 5
-nnoremap <D-S-left> :vertical resize -5<cr>
-nnoremap <D-S-down> :resize +5<cr>
-nnoremap <D-S-up> :resize -5<cr>
-nnoremap <D-S-right> :vertical resize +5<cr>
-
-" switch between windows with Cmd-[H,J,K,L]
-noremap <D-S-H> <C-w>h
-noremap <D-S-J> <C-w>j
-noremap <D-S-K> <C-w>k
-noremap <D-S-L> <C-w>l
-
+noremap <C-J> <C-W>j
+noremap <C-K> <C-W>k
+noremap <C-H> <C-W>h
+noremap <C-L> <C-W>l
 
 " Always show line numbers and current position. ALWAYS!
 set ruler
 set number
-set mouse=a
-filetype on
 
+" SAVED MACROS
+let @c = 'f>i classNames=€kb€kb={classNames.}i'
+
+" make list-like commands more intuitive
+function! CCR()
+  let cmdline = getcmdline()
+  if cmdline =~ '\v\C^(ls|files|buffers)'
+    " like :ls but prompts for a buffer command
+    return "\<CR>:b"
+  elseif cmdline =~ '\v\C/(#|nu|num|numb|numbe|number)$'
+    " like :g//# but prompts for a command
+    return "\<CR>:"
+  elseif cmdline =~ '\v\C^(dli|il)'
+    " like :dlist or :ilist but prompts for a count for :djump or :ijump
+    return "\<CR>:" . cmdline[0] . "j  " . split(cmdline, " ")[1] . "\<S-Left>\<Left>"
+  elseif cmdline =~ '\v\C^(cli|lli)'
+    " like :clist or :llist but prompts for an error/location number
+    return "\<CR>:sil " . repeat(cmdline[0], 2) . "\<Space>"
+  elseif cmdline =~ '\C^old'
+    " like :oldfiles but prompts for an old file to edit
+    set nomore
+    return "\<CR>:sil se more|e #<"
+  elseif cmdline =~ '\C^changes'
+    " like :changes but prompts for a change to jump to
+    set nomore
+    return "\<CR>:sil se more|norm! g;\<S-Left>"
+  elseif cmdline =~ '\C^ju'
+    " like :jumps but prompts for a position to jump to
+    set nomore
+    return "\<CR>:sil se more|norm! \<C-o>\<S-Left>"
+  elseif cmdline =~ '\C^marks'
+    " like :marks but prompts for a mark to jump to
+    return "\<CR>:norm! `"
+  elseif cmdline =~ '\C^undol'
+    " like :undolist but prompts for a change to undo
+    return "\<CR>:u "
+  else
+    return "\<CR>"
+  endif
+endfunction
+cnoremap <expr> <CR> CCR()
+
+map <leader>a :execute "Ag " . expand("<cword>") <Bar> cw<CR>
